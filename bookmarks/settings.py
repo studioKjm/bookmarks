@@ -38,6 +38,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'social_django', # p258
+    'images.apps.ImagesConfig', # p296
+
 ]
 
 MIDDLEWARE = [
