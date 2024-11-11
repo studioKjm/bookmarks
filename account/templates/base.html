@@ -1,10 +1,10 @@
-<!-- account/templates/base.html -->
-{% load static %}
+<!--account/templates/base.html-->
 <!DOCTYPE html>
+{% load static %}
 <html>
 <head>
   <title>{% block title %}{% endblock %}</title>
-  <link href="{% static "css/base.css" %}" rel="stylesheet">
+  <link href="{% static 'css/base.css' %}" rel="stylesheet">
 </head>
 <body>
   <div id="header">
@@ -25,9 +25,12 @@
     <span class="user">
       {% if request.user.is_authenticated %}
         Hello {{ request.user.first_name|default:request.user.username }},
-        <a href="{% url "logout" %}">Logout</a>
+        <form action="{% url 'logout' %}" method="post">
+            {% csrf_token %}
+            <input type="submit" value="로그아웃" />
+        </form>
       {% else %}
-        <a href="{% url "login" %}">Log-in</a>
+        <a href="{% url 'login' %}">Log-in</a>
       {% endif %}
     </span>
   </div>
@@ -47,3 +50,4 @@
   </div>
 </body>
 </html>
+

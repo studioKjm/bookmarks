@@ -2,11 +2,10 @@
 
 from django.http import HttpResponse
 from django.shortcuts import render
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
-from .forms import LoginForm, UserRegistrationForm, \
-                   UserEditForm, ProfileEditForm
+from .forms import LoginForm, UserRegistrationForm, UserEditForm, ProfileEditForm
 from .models import Profile
 
 
@@ -30,6 +29,10 @@ def user_login(request):
         form = LoginForm()
     return render(request, 'account/login.html', {'form': form})
 
+@login_required
+def user_logout(request):
+    logout(request)
+    return render(request, 'registration/logged_out.html', {'section': 'logout'})
 
 @login_required
 def dashboard(request):
